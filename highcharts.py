@@ -126,29 +126,3 @@ class Highchart:
         js_full = boiler % (self.div, self.title, self.x_type, self.cats, self.y_title,
                             hc_str)
         return js_full
-
-
-def main():
-    f = open("test_line.html", 'w')
-    imports = get_imports()
-    f.write(imports)
-    f.write("\n<div id=\"container\"></div>\n")
-    f.write("\n<script type=\"text/javascript\" charset=\"utf-8\">")
-    x = [[1, 2, 3, 4, 5, 6, 8], [0, 1, 2]]
-    y = [[5, 3, 2, 9, 10, 11, 13], [1, 8, -2]]
-    cats = ['Hi', 'My', 'Name', 'Is', 'Ryan', 'Whitley']
-    stderr = [[[5, 1], [10, 3], [3, 2], [8, 4], [
-        6, 3], [4, 2]], [[9, 3.5], [7, 4.5], [10, 5]]]
-    colors = ["red", "green"]
-    legend_titles = ["Awesome", "Chart"]
-
-    chart_options = ["Test Graph", 'bar', "category", cats,
-                     "yaxis", colors, legend_titles, "container", stderr, 'linear']
-    my_graph = Plot(x, y, chart_options)
-    f.write(my_graph.highcharts_str())
-    f.write("\n</script>")
-    f.close()
-
-if __name__ == '__main__':
-    main()
-

@@ -50,15 +50,9 @@ def main():
 
     data = ['Age', 'Overall']
     data = df[data]
-    x = []
-    y = []
-    for i in data.index:
-        x.append(data['Overall'][i])
-        y.append(data['Age'][i])
-
     chart_options = ["Age vs Overall Rank", 'scatter', 'category',
                      [], 'Age', [], ['Overall'], "container2", [], 'linear']
-    chart = Highchart([x], [y], chart_options)
+    chart = Highchart([list(data['Overall'])], [list(data['Age'])], chart_options)
     f.write("\n<div id=\"container2\"></div>\n")
     f.write("\n<script type=\"text/javascript\" charset=\"utf-8\">")
     f.write(chart.highcharts_str())

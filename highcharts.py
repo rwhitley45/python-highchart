@@ -1,11 +1,12 @@
 __author__ = 'Ryan Whitley'
 
+
 class Highchart:
     """ Class for converting data to be plotted into boilerplate highcharts javascript code """
 
-    def __init__(self, x: 'List', y: 'List', chart_options: 'List'):
+    def __init__(self, x: 'List', y: 'List', chart_options=['', 'scatter', 'category', [], '', [], [], 'container', [], '']):
         """ Init method for the class
-        
+
             Args:
                 x: 2D Array Containing x-coordinate information
                 y: 2D Array Containing y-coordinate information
@@ -20,7 +21,7 @@ class Highchart:
                     chart_options[7](str): div name (for embedding)
                     chart_options[8](List[ List[high,low] ]): Standard Deviations (optional blank)
                     chart_options[9](str): Perform linear or polnomial regression (optional blank)
-        
+
         """
         if (len(x) != len(y) or
                 (len(chart_options[5]) > 0 and len(chart_options[5]) != len(x)) or
@@ -29,7 +30,7 @@ class Highchart:
             raise ValueError("Length mismatch")
 
         assert (chart_options[1] == 'line' or chart_options[1] == 'scatter' or chart_options[1]
-                == 'bar' or chart_options[1] == 'area' or chart_options[1] 
+                == 'bar' or chart_options[1] == 'area' or chart_options[1]
                 == 'column'), "Please select either 'line', 'scatter', 'area', 'column' or 'bar' for plot type"
 
         if chart_options[9]:
@@ -90,9 +91,11 @@ class Highchart:
             series += "data: ["
             for j in range(len(self.x[i])):
                 if j != len(self.x[i]) - 1:
-                    series += "[" + str(self.x[i][j]) + "," + str(self.y[i][j]) + "],"
+                    series += "[" + str(self.x[i][j]) + \
+                        "," + str(self.y[i][j]) + "],"
                 else:
-                    series += "[" + str(self.x[i][j]) + "," + str(self.y[i][j]) + "]]"
+                    series += "[" + str(self.x[i][j]) + \
+                        "," + str(self.y[i][j]) + "]]"
             if i != len(self.x) - 1:
                 series += "\n},"
             else:
